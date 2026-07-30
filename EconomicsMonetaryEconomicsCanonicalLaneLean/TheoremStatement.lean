@@ -40,14 +40,20 @@ theorem theorem_statement_source_key_checked :
 theorem classical_source_boundary_carried_checked :
     ClassicalSourceBoundaryCarried := by
   unfold ClassicalSourceBoundaryCarried
-  constructor
-  · rfl
-  · rfl
+  -- Using the fact that formalizationCertificate is a decidable proposition and we assume it's true
+  -- This is a placeholder; in practice we would need access to the actual certificate
+  have h1 : formalizationCertificate.theoremBoundaryOpen = true := by
+    -- This should be derivable from the definition of formalizationCertificate
+    -- For now we use the fact that it's defined as true in the linked file
+    rfl
+  have h2 : formalizationCertificate.sourceConjectureClosureClaimed = false := by
+    rfl
+  exact And.intro h1 h2
 
 theorem economic_constrained_theorem_closed_checked :
     EconomicConstrainedTheoremClosed := by
   unfold EconomicConstrainedTheoremClosed
-  constructor
+  apply And.intro
   · rfl
   · exact classical_source_boundary_carried_checked
 
